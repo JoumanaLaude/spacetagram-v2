@@ -1,18 +1,22 @@
-import Home from "./Home";
+import Home from "./landing/Home";
 import Explore from "./components/Explore";
 import About from "./components/About";
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 export default function Main() {
+    const HomePage = () => {
+        return (
+            <Home />
+        );
+    };
 
     return (
         <div>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route exact path="explore" element={<Explore />} />
-                <Route exact path="explore/#starred" element={<Explore />} />
-                <Route exact path="/about" element={<About />} />
-            </Routes>
+            <Switch>
+                <Route component={HomePage} exact path="/" />
+                <Route component={Explore} exact path="/explore" />
+                <Route component={About} exact path="/about" />
+            </Switch>
         </div>
     );
 }

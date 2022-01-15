@@ -1,16 +1,16 @@
 import React from "react";
-import Today from "./components/Today";
-import Navigation from "./components/Navigation";
+import Today from "./Today";
+import Navigation from "../components/Navigation";
 
 export default function Home() {
     return (
         <>
-        <Navigation />
-            <section>
+            <Navigation />
+            <main>
                 <h1>Spacetagram v2</h1>
                 <p>A space to view our universe.</p>
-            </section>
-            <Today />
+                <Today />
+            </main>
         </>
     )
 }

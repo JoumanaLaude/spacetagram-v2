@@ -14,14 +14,16 @@ export default function Explore() {
     const [media, setMedia] = useState([]);
     const [faves, setFaves] = useState([]);
 
-    const mediaGet = () => {
-        // change to await fetch to check if the fetch resolves successfully
-        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=15`)
-            .then(res => res.json())
-            .then(result => {
-                setMedia(result)
-            })
-    }
+    useEffect(() => {
+        const abortController = new AbortController();
+        const opts = { signal: abortController.signal };
+
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=15`, opts)
+            .then((response) => response.json())
+            .then((data) => setMedia(data))
+            .catch((error) => console.log(error.message));
+        return () => abortController.abort();
+    }, []);
 
     const addFave = (fave) => {
         const isAlreadyStarred = faves.filter(
@@ -54,9 +56,9 @@ export default function Explore() {
 
     // if (!media) return <Loading />;
 
-    useEffect(() => {
-        mediaGet()
-    }, [])
+    // useEffect(() => {
+    //     mediaGet()
+    // }, [])
 
     console.log(faves);
 

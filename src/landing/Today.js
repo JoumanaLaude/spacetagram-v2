@@ -5,39 +5,38 @@ import ModalImage from "react-modal-image";
 const apiKey = process.env.REACT_APP_APOD_KEY;
 
 export default function Today() {
-    const [today, setToday] = useState(null);
+    const [mediaData, setMediaData] = useState(null);
 
     useEffect(() => {
         fetchMedia();
         async function fetchMedia() {
             const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
             const data = await res.json();
-            setToday(data);
+            setMediaData(data);
             console.log(data);
         }
     }, []);
 
-    // if (!today) return <Loading />;
+    if (!mediaData) return "loading!!";
 
     return (
-        <>
-            <section>
-                <Title>Today ({today.date}): {today.title}</Title>
-                <Box>
-                <Card>
-                    {today.media_type === "image" ? (
+        <section>
+            <Title>Today ({mediaData.date}) <br /> Let's learn about {mediaData.title}:</Title>
+            <Box>
+                <TodayCard>
+                    {mediaData.media_type === "image" ? (
                         <ModalImage
-                            small={today.url}
-                            large={today.hdurl}
+                            small={mediaData.url}
+                            large={mediaData.hdurl}
                             hideDownload={true}
                             showRotate={true}
-                            alt={today.title}
+                            alt={mediaData.title}
                             className="today"
                         />
                     ) : (
                         <iframe
                             title="space-video"
-                            src={today.url}
+                            src={mediaData.url}
                             frameBorder="0"
                             gesture="media"
                             allow="encrypted-media"
@@ -46,18 +45,17 @@ export default function Today() {
                             loading="lazy"
                         />
                     )}
-                    <div>
-                        <CardText>{today.explanation}</CardText>
-                        <CardText>{today.copyright}</CardText>
+                    <div className="card-container">
+                        <CardText>{mediaData.explanation}</CardText>
+                        <CardText>{mediaData.copyright}</CardText>
                     </div>
-                </Card>
+                </TodayCard>
             </Box>
-            </section>
-        </>
+        </section>
     )
 }
 
-const Card = styled.div`
+const TodayCard = styled.div`
     box-shadow: 10px 10px 5px rgba(60,79,118, 0.3);
     border-radius: 5px;
     background-color: #EFE6FF;
@@ -67,10 +65,10 @@ const Card = styled.div`
 `
 
 const CardText = styled.p`
-    line-height: 1.4rem;
+    line-height: 1.4em;
     padding: 2rem;
     text-align: justify;
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 600px) {
         display: none;
     }
 `;
@@ -84,7 +82,7 @@ const Box = styled.div`
 
 const Title = styled.h3`
     font-size: 1.4rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
     @media only screen and (max-width: 700px) {
         font-size: 1rem;

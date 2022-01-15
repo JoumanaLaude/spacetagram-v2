@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import StarButton from "./StarButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import StarButton from "./StarButton";
 import styled from "styled-components";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
@@ -10,11 +8,10 @@ export default function Main() {
 
     const [media, setMedia] = useState([]);
     const [faves, setFaves] = useState([]);
-    // const [star, setStar] = useState(false);
 
     const mediaGet = () => {
         // change to await fetch to check if the fetch resolves successfully
-        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=10`)
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=12`)
             .then(res => res.json())
             .then(result => {
                 setMedia(result)
@@ -37,12 +34,6 @@ export default function Main() {
         setFaves(faves.filter(favorite => favorite.url !== url));
     };
 
-    // const handleToggle = () => {
-    //     setStar((star) => {
-    //         return !star;
-    //     });
-    // };
-
     // if (!media) return <Loading />;
 
     useEffect(() => {
@@ -55,21 +46,20 @@ export default function Main() {
         <>
             <section>
                 <Box>
-                    <h2>Search through time:</h2>
-                    <button onClick={() => window.location.reload(false)} type="button">Randomize!</button>
+                    <p>Click the button to search through time!</p>
+                    <button onClick={() => window.location.reload(false)} type="button">Explore</button>
                     <Grid>
                         {media.map((item, index) => (
-                            <div key={index}>
-                                <h2>{item.title}</h2>
-                                <h3>{item.date}</h3>
+                            <Card key={index}>
                                 <img src={item.url} alt={item.title} />
+                                <h3>{item.date}</h3>
+                                <h2>{item.title}</h2>
                                 <button
                                     onClick={() => addFave(item)}
                                     type="button">
-                                    add {" "}
-                                    <FontAwesomeIcon icon={faStar} className="fa-1x fa-fw star-toggle" />
+                                    <StarButton />
                                 </button>
-                            </div>
+                            </Card>
                         ))}
 
                     </Grid>
@@ -78,18 +68,20 @@ export default function Main() {
 
             <section>
                 <Box>
-                    <h1>Favorites</h1>
+                    <h1>Starred</h1>
                     <Grid>
                         {faves.map((favorite, faved) => (
-                            <div key={faved}>
+                            <Card key={faved}>
                                 <img src={favorite.url} alt={favorite.title} />
+                                <h3>{favorite.date}</h3>
+                                <h2>{favorite.title}</h2>
                                 <button
                                     type="button"
                                     url={favorite.url}
                                     onClick={removeFave}
                                 >remove item
                                 </button>
-                            </div>
+                            </Card>
                         ))}
                     </Grid>
                 </Box>
@@ -124,3 +116,12 @@ const Box = styled.div`
         width: 100%;
     }
 `;
+
+const Card = styled.div`
+    box-shadow: 10px 10px 5px rgba(60,79,118, 0.3);
+    border-radius: 5px;
+    background-color: #EFE6FF;
+    color: #222;
+    width: fit-content;
+    height: fit-content;
+`

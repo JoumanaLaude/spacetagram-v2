@@ -4,7 +4,7 @@ import StarButton from "../StarButton";
 import styled from "styled-components";
 import ModalImage from "react-modal-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 import Top from "./Top";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
@@ -64,7 +64,7 @@ export default function Explore() {
 
     return (
         <>
-        <Navigation />
+            <Navigation />
             <section>
                 <Box>
                     <h1>Explore</h1>
@@ -72,8 +72,12 @@ export default function Explore() {
                     <button
                         onClick={() => window.location.reload(false)}
                         type="button">
-                        <FontAwesomeIcon icon={faStar} className="fa-fw" /> Explore the Universe<FontAwesomeIcon icon={faStar} className="fa-fw" />
-                    </button><hr />
+                        <FontAwesomeIcon icon={faSearch} className="fa-fw" /> Explore Universe
+                    </button>{' '}
+                    <a href="#starred"><button type="button">
+                        <FontAwesomeIcon icon={faStar} className="fa-fw" /> View Stars
+                    </button></a>
+                    <hr />
                     <Grid>
                         {media.map((item, index) => (
                             <Card key={index}>

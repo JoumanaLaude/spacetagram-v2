@@ -21,7 +21,7 @@ export default function Today() {
 
     return (
         <section>
-            <Title>Today ({mediaData.date}) <br /> Let's learn about {mediaData.title}:</Title>
+            <Title>Today ({mediaData.date}) <br /> Let's take a look at {mediaData.title}:</Title>
             <Box>
                 <TodayCard>
                     {mediaData.media_type === "image" ? (

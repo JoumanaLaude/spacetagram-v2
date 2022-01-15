@@ -5,13 +5,11 @@ import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <>
-      <div className="App">
-        Spacetagram v2
-      </div>
+      <h1>Spacetagram v2</h1>
 
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
     </>
   );
 }

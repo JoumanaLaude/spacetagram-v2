@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 // import StarButton from "./StarButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
 
-function Main() {
+export default function Main() {
 
     const [media, setMedia] = useState([]);
     const [faves, setFaves] = useState([]);
@@ -48,47 +49,78 @@ function Main() {
         mediaGet()
     }, [])
 
-    // console.log(media);
     console.log(faves);
-
 
     return (
         <>
-            <h1>Spacetagram v2</h1>
+            <section>
+                <Box>
+                    <h2>Search through time:</h2>
+                    <button onClick={() => window.location.reload(false)} type="button">Randomize!</button>
+                    <Grid>
+                        {media.map((item, index) => (
+                            <div key={index}>
+                                <h2>{item.title}</h2>
+                                <h3>{item.date}</h3>
+                                <img src={item.url} alt={item.title} />
+                                <button
+                                    onClick={() => addFave(item)}
+                                    type="button">
+                                    add {" "}
+                                    <FontAwesomeIcon icon={faStar} className="fa-1x fa-fw star-toggle" />
+                                </button>
+                            </div>
+                        ))}
 
-            {media.map((item, index) => (
-                <div key={index}>
-                    <h2>{item.title}</h2>
-                    <h3>{item.date}</h3>
-                    <img src={item.url} alt={item.title} />
-                    <button
-                        onClick={() => addFave(item)}
-                        type="button">
-                        add {" "}
-                        <FontAwesomeIcon icon={faStar} className="fa-1x fa-fw star-toggle" />
-                    </button>
-                </div>
-            ))}
+                    </Grid>
+                </Box>
+            </section>
 
-            <h1>Favorites</h1>
-            <ul>
-                {faves.map(favorite => {
-                    return (
-                        <>
-                            <img src={favorite.url} alt={favorite.title} />
-                            <button
-                                type="button"
-                                url={favorite.url}
-                                onClick={removeFave}
+            <section>
+                <Box>
+                    <h1>Favorites</h1>
+                    <Grid>
+                        {faves.map((favorite, faved) => (
+                            <div key={faved}>
+                                <img src={favorite.url} alt={favorite.title} />
+                                <button
+                                    type="button"
+                                    url={favorite.url}
+                                    onClick={removeFave}
                                 >remove item
-                            </button>
-                        </>
-                    );
-                })}
-            </ul>
-
+                                </button>
+                            </div>
+                        ))}
+                    </Grid>
+                </Box>
+            </section>
         </>
     )
 }
 
-export default Main;
+const Grid = styled.div`
+    display: grid;
+    grid-row: 2 / auto;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5rem;
+    padding: 4rem;
+    
+    @media only screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+
+    @media only screen and (min-width: 1500px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+`;
+
+const Box = styled.div`
+    width: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 3rem;
+    
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+    }
+`;

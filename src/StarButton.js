@@ -13,7 +13,7 @@ export default function StarButton() {
 
     return (
         <>
-            <span onClick={() => { handleToggle(); }}>
+            <button onClick={() => { handleToggle(); }}>
                 Add Star{" "}
                 {
                     starMedia ? (
@@ -21,7 +21,7 @@ export default function StarButton() {
                     ) : (
                         <FontAwesomeIcon icon={faStar} className="fa-1x fa-fw star" />
                     )}
-            </span>
+            </button>
         </>
 
     );

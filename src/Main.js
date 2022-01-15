@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarButton from "./StarButton";
 import styled from "styled-components";
+import ModalImage from "react-modal-image";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
 
@@ -27,12 +28,25 @@ export default function Main() {
         }
         const newFavesList = [...faves, fave];
         setFaves(newFavesList);
+        // saveToLocalStorage(newFavesList);
     };
 
     const removeFave = (e) => {
         const url = e.target.getAttribute("url")
         setFaves(faves.filter(favorite => favorite.url !== url));
     };
+
+    // const saveToLocalStorage = (fave) => {
+    //     localStorage.setItem("starred", JSON.stringify(fave));
+    // };
+
+    // useEffect(() => {
+    //     const storedStars = JSON.parse(localStorage.getItem("fave"));
+
+    //     if (Array.isArray(storedStars)) {
+    //         setFaves(storedStars);
+    //     }
+    // }, []);
 
     // if (!media) return <Loading />;
 
@@ -46,19 +60,34 @@ export default function Main() {
         <>
             <section>
                 <Box>
+                    <h1>Browse</h1>
                     <p>Click the button to search through time!</p>
                     <button onClick={() => window.location.reload(false)} type="button">Explore</button>
                     <Grid>
                         {media.map((item, index) => (
                             <Card key={index}>
-                                <img src={item.url} alt={item.title} />
+                                {item.media_type === "image" ? (
+                                    <ModalImage
+                                        small={item.url}
+                                        large={item.hdurl}
+                                        hideDownload={true}
+                                        showRotate={true}
+                                        alt={item.title}
+                                    />
+                                ) : (
+                                    <iframe
+                                        src={item.url}
+                                        frameBorder="0"
+                                        allow="encrypted-media"
+                                        className="video"
+                                    />
+                                )}
                                 <h3>{item.date}</h3>
                                 <h2>{item.title}</h2>
-                                <button
-                                    onClick={() => addFave(item)}
-                                    type="button">
+                                <span
+                                    onClick={() => addFave(item)}>
                                     <StarButton />
-                                </button>
+                                </span>
                             </Card>
                         ))}
 
@@ -79,7 +108,7 @@ export default function Main() {
                                     type="button"
                                     url={favorite.url}
                                     onClick={removeFave}
-                                >remove item
+                                >Remove Star
                                 </button>
                             </Card>
                         ))}

@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
-import Main from './Main';
-import { BrowserRouter } from 'react-router-dom';
+import Home from "./landing/Home";
+import Explore from "./components/Explore";
+import About from "./components/About";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
-        <Main />
+        <Switch>
+          <Route component={Home} exact path="/" />
+          <Route component={Explore} exact path="/explore" />
+          <Route component={About} exact path="/about" />
+        </Switch>
       </BrowserRouter>
     </>
   );

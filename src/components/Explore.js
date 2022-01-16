@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {
+    useState, useEffect, 
+    // useContext
+} from "react";
 import Navigation from "./Navigation";
 import StarButton from "../StarButton";
 import styled from "styled-components";
@@ -6,10 +9,12 @@ import ModalImage from "react-modal-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 import Top from "./Top";
+// import FavoritesContext from "../FavoritesProvider";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
 
 export default function Explore() {
+    // const { media, addFave } = useContext(FavoritesContext);
 
     const [media, setMedia] = useState([]);
     const [faves, setFaves] = useState([]);
@@ -28,7 +33,8 @@ export default function Explore() {
     const addFave = (fave) => {
         const isAlreadyStarred = faves.filter(
             item => item === fave
-        );
+        )
+
         if (isAlreadyStarred.length > 0) {
             return;
         }
@@ -46,19 +52,15 @@ export default function Explore() {
     //     localStorage.setItem("starred", JSON.stringify(fave));
     // };
 
-    // useEffect(() => {
-    //     const storedStars = JSON.parse(localStorage.getItem("fave"));
+    useEffect(() => {
+        const storedStars = JSON.parse(localStorage.getItem("fave"));
 
-    //     if (Array.isArray(storedStars)) {
-    //         setFaves(storedStars);
-    //     }
-    // }, []);
+        if (Array.isArray(storedStars)) {
+            setFaves(storedStars);
+        }
+    }, []);
 
-    // if (!media) return <Loading />;
-
-    // useEffect(() => {
-    //     mediaGet()
-    // }, [])
+    if (!media) return "LOADING !!";
 
     console.log(faves);
 
@@ -100,8 +102,9 @@ export default function Explore() {
                                 )}
                                 <h3>{item.date}</h3>
                                 <h2>{item.title}</h2>
-                                <span
-                                    onClick={() => addFave(item)}>
+                                <span onClick={() => {
+                                    addFave(item)
+                                }}>
                                     <StarButton />
                                 </span>
                             </Card>
@@ -141,7 +144,8 @@ const Grid = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-gap: 5rem;
     padding: 4rem;
-    
+    justify-items: center;
+
     @media only screen and (max-width: 900px) {
         grid-template-columns: 1fr;
     }
@@ -156,7 +160,7 @@ const Box = styled.div`
     display: inline-block;
     vertical-align: middle;
     padding-bottom: 3rem;
-    
+
     @media only screen and (max-width: 800px) {
         width: 100%;
     }

@@ -65,6 +65,7 @@ button {
   font-weight: 600;
   color: #EFE6FF;
   background-color: #7379a8;
+  border: 2px solid #7379a8;
  }
 
  button:hover {
@@ -72,6 +73,7 @@ button {
   transition: 200ms ease-in-out;
   color: #7379a8;
   background-color: #e7d9ff;
+  border: 2px solid #7379a8;
  }
 
  .star-toggle {
@@ -79,7 +81,7 @@ button {
 }
 
 .star {
-  opacity: .3;
+  opacity: .6;
 }
 
 ::-moz-selection {

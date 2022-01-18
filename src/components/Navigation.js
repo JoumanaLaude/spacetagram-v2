@@ -15,7 +15,7 @@ export default function Navbar() {
                 <Link to="#" className="menu-bars">
                     <FontAwesomeIcon icon={faBars} className="fa-2x" onClick={showMenu} />
                 </Link>
-                <Link to="/"><Title>Spacetagram v2</Title></Link>
+                <Link to="/"><Title>Spacetagram</Title></Link>
                 <nav className={isOpen ? "nav-menu active" : "nav-menu"}>
                     <ul className="nav-links">
                         <NavItem>

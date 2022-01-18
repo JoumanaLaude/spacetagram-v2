@@ -7,7 +7,7 @@ export default function Home() {
         <>
             <Navigation />
             <main>
-                <h1>Spacetagram v2</h1>
+                <h1>Spacetagram</h1>
                 <p>A space to view our universe.</p>
                 <Today />
             </main>

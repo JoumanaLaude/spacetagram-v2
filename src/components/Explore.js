@@ -70,7 +70,7 @@ export default function Explore() {
             <section>
                 <Box>
                     <h1>Explore</h1>
-                    <p>Click the button to search through time and see what you will find.</p>
+                    <p>Search through time and see what you will find.</p>
                     <button
                         onClick={() => window.location.reload(false)}
                         type="button">
@@ -115,7 +115,7 @@ export default function Explore() {
 
             <section id="starred">
                 <Box>
-                    <h1>My Stars</h1><hr />
+                    <h1>Starred</h1><hr />
                     <Grid>
                         {faves.map((favorite, faved) => (
                             <Card key={faved}>

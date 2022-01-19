@@ -42,8 +42,9 @@ export default function Explore() {
         if (isAlreadyStarred.length > 0) {
             return;
         }
-        const newFavesList = [...faves, fave];
-        setFaves(newFavesList);
+        // const newFavesList = [...faves, fave];
+        // setFaves(newFavesList);
+        setFaves(prev => [...prev, fave]);
         // saveToLocalStorage(newFavesList);
     };
 

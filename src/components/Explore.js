@@ -1,14 +1,16 @@
 import React, {
-    useState, useEffect, 
+    useState, useEffect,
     // useContext
 } from "react";
+import Loading from "../Loading";
 import Navigation from "./Navigation";
-import StarButton from "../StarButton";
 import styled from "styled-components";
+import StarButton from "./StarButton";
 import ModalImage from "react-modal-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 import Top from "./Top";
+// import Card from "./Card";
 // import FavoritesContext from "../FavoritesProvider";
 
 const apiKey = process.env.REACT_APP_APOD_KEY;
@@ -29,6 +31,8 @@ export default function Explore() {
             .catch((error) => console.log(error.message));
         return () => abortController.abort();
     }, []);
+
+    if (!media.length) return <Loading />;
 
     const addFave = (fave) => {
         const isAlreadyStarred = faves.filter(
@@ -52,15 +56,14 @@ export default function Explore() {
     //     localStorage.setItem("starred", JSON.stringify(fave));
     // };
 
-    useEffect(() => {
-        const storedStars = JSON.parse(localStorage.getItem("fave"));
+    // useEffect(() => {
+    //     const storedStars = JSON.parse(localStorage.getItem("fave"));
 
-        if (Array.isArray(storedStars)) {
-            setFaves(storedStars);
-        }
-    }, []);
+    //     if (Array.isArray(storedStars)) {
+    //         setFaves(storedStars);
+    //     }
+    // }, []);
 
-    if (!media) return "LOADING !!";
 
     console.log(faves);
 
@@ -82,6 +85,10 @@ export default function Explore() {
                     <hr />
                     <Grid>
                         {media.map((item, index) => (
+                            // <Card
+                            //     key={item.id}
+                            //     {...item}
+                            // />
                             <Card key={index}>
                                 {item.media_type === "image" ? (
                                     <ModalImage
@@ -173,4 +180,4 @@ const Card = styled.div`
     color: #222;
     width: fit-content;
     height: fit-content;
-`
+`;

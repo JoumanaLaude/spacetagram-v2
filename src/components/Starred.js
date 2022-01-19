@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React,
+{
+    // useContext, 
+    useState
+} from "react";
 import Navigation from "./Navigation";
 import styled from "styled-components";
 import Top from "./Top";
-import FavoritesContext from "../FavoritesProvider";
+// import FavoritesContext from "../FavoritesProvider";
 
 
 export default function Starred() {
-    const {faves, removeFave} = useContext(FavoritesContext);
+    // const {faves, removeFave} = useContext(FavoritesContext);
+
+    const [faves, setFaves] = useState([]);
+
+    const removeFave = (e) => {
+        const url = e.target.getAttribute("url")
+        setFaves(faves.filter(favorite => favorite.url !== url));
+    };
 
     return (
         <>

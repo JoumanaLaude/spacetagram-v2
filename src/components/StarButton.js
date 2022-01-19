@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function StarButton() {
+
     const [starMedia, setStarMedia] = useState(false);
 
     const handleToggle = () => {
@@ -13,7 +14,7 @@ export default function StarButton() {
 
     return (
         <>
-            <button onClick={() => { handleToggle(); }}>
+            <button onClick={() => { handleToggle() }}>
                 Add Star{" "}
                 {
                     starMedia ? (

@@ -8,7 +8,7 @@ export default function About() {
             <Navigation />
             <section>
                 <h1>About</h1>
-                <p>Spacetagram is created with NASA"s Astronomy Picture of the Day API.
+                <p>Spacetagram is created with NASA's Astronomy Picture of the Day API.
                     <br />Media includes images and videos that date back to 1995!</p>
                 <img src={gif} alt="anime space gif" className="gif" />
                 <p><em>This app was created by JL for Shopify's Front End Developer Intern Challenge.</em></p>

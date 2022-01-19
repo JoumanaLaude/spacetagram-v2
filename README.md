@@ -1,6 +1,6 @@
 # Spacetagram
 
-Responsive web app for viewing a new image from NASA's Astronomy of the Day API.
+Responsive web app for viewing a new image daily from NASA's Astronomy of the Day API.
 
 ![Preview](https://i.imgur.com/Ebtjsqn.png)
 

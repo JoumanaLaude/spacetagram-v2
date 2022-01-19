@@ -28,6 +28,7 @@ export default function Navbar() {
                         <NavItem><Link to="/"><FontAwesomeIcon icon={faSatellite} className="fa-fw" /> Today</Link></NavItem>
                         <NavItem><Link to="/explore"><FontAwesomeIcon icon={faMeteor} className="fa-fw" /> Explore</Link></NavItem>
                         {/* <NavItem><a href="/explore/#starred"><FontAwesomeIcon icon={faStar} className="fa-fw" /> Starred</a></NavItem> */}
+                        {/* <NavItem><Link to="/starred"><FontAwesomeIcon icon={faStar} className="fa-fw" /> Starred</Link></NavItem> */}
                         <NavItem><Link to="/about"><FontAwesomeIcon icon={faRocket} className="fa-fw" /> About</Link></NavItem>
                     </ul>
                 </nav>

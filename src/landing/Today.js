@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Loading from "../Loading";
 import styled from "styled-components";
 import ModalImage from "react-modal-image";
 
@@ -17,7 +18,7 @@ export default function Today() {
         }
     }, []);
 
-    if (!mediaData) return "loading!!";
+    if (!mediaData) return <Loading />;
 
     return (
         <section>

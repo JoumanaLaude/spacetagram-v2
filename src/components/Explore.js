@@ -20,19 +20,24 @@ export default function Explore() {
 
     const [media, setMedia] = useState([]);
     const [faves, setFaves] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
+
         const abortController = new AbortController();
         const opts = { signal: abortController.signal };
 
         fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=15`, opts)
             .then((response) => response.json())
             .then((data) => setMedia(data))
-            .catch((error) => console.log(error.message));
+            .catch((error) => console.log(error.message))
+            .finally(() => setLoading(false));
         return () => abortController.abort();
     }, []);
 
-    if (!media.length) return <Loading />;
+    if (loading) return <Loading />;
+    // if (!media.length) return <Loading />;
 
     const addFave = (fave) => {
         const isAlreadyStarred = faves.filter(

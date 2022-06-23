@@ -22,36 +22,36 @@ export default function Today() {
 
     return (
         <section>
-            <Title>Today ({mediaData.date}) <br /> Let's take a look at {mediaData.title}:</Title>
-            <Box>
-                <TodayCard>
-                    {mediaData.media_type === "image" ? (
-                        <ModalImage
-                            small={mediaData.url}
-                            large={mediaData.hdurl}
-                            hideDownload={true}
-                            showRotate={true}
-                            alt={mediaData.title}
-                            className="today"
-                        />
-                    ) : (
-                        <iframe
-                            title="space-video"
-                            src={mediaData.url}
-                            frameBorder="0"
-                            gesture="media"
-                            allow="encrypted-media"
-                            allowFullScreen
-                            className="video"
-                            loading="lazy"
-                        />
-                    )}
-                    <div className="card-container">
-                        <CardText>{mediaData.explanation}</CardText>
-                        <CardText>{mediaData.copyright}</CardText>
-                    </div>
-                </TodayCard>
-            </Box>
+                <Title>Today ({mediaData.date}) <br /> Let's take a look at {mediaData.title}:</Title>
+                <Box>
+                    <TodayCard>
+                        {mediaData.media_type === "image" ? (
+                            <ModalImage
+                                small={mediaData.url}
+                                large={mediaData.hdurl}
+                                hideDownload={true}
+                                showRotate={true}
+                                alt={mediaData.title}
+                                className="today"
+                            />
+                        ) : (
+                            <iframe
+                                title="space-video"
+                                src={mediaData.url}
+                                frameBorder="0"
+                                gesture="media"
+                                allow="encrypted-media"
+                                allowFullScreen
+                                className="video"
+                                loading="lazy"
+                            />
+                        )}
+                        <div className="card-container">
+                            <CardText>{mediaData.explanation}</CardText>
+                            <CardText>{mediaData.copyright}</CardText>
+                        </div>
+                    </TodayCard>
+                </Box>
         </section>
     )
 }

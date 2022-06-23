@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Navigation from "./components/Navigation";
 import Home from "./landing/Home";
 import Explore from "./components/Explore";
 import About from "./components/About";
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Navigation />
         <Switch>
           <Route component={Home} exact path="/" />
           <Route component={Explore} exact path="/explore" />

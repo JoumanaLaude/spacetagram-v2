@@ -3,7 +3,6 @@ import React, {
     // useContext
 } from "react";
 import Loading from "../Loading";
-import Navigation from "./Navigation";
 import styled from "styled-components";
 import StarButton from "./StarButton";
 import ModalImage from "react-modal-image";
@@ -28,7 +27,7 @@ export default function Explore() {
         const abortController = new AbortController();
         const opts = { signal: abortController.signal };
 
-        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=15`, opts)
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=18`, opts)
             .then((response) => response.json())
             .then((data) => setMedia(data))
             .catch((error) => console.log(error.message))
@@ -75,7 +74,6 @@ export default function Explore() {
 
     return (
         <>
-            <Navigation />
             <section>
                 <Box>
                     <h1>Explore</h1>
